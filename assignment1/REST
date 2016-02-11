@@ -1,0 +1,27 @@
+{
+	"id": "60891044-afc7-f5fb-8435-9072615bded7",
+	"name": "Assignment1",
+	"order": [
+		"fb5eccf9-6e25-aa4a-8619-a397b9c62415"
+	],
+	"timestamp": 1455125941152,
+	"requests": [
+		{
+			"id": "fb5eccf9-6e25-aa4a-8619-a397b9c62415",
+			"url": "https://www.googleapis.com/books/v1/volumes?q=turing",
+			"method": "GET",
+			"headers": "",
+			"data": [],
+			"dataMode": "params",
+			"tests": "// Create jsonData variable\nvar jsonData = JSON.parse(responseBody);\n\n// Set the number of items in the json array\nvar itemCount = jsonData.items.length;\n\n// Create a variable to count the number of titles that have \"turing\" in the title \nvar confirmedItems = 0;\n\n// Loop through the array to validate that each item has \"turing\" in their title\nfor (var i = 0; i < jsonData.items.length; i++) {\n    \n    // Get the title of the current item\n    var title = jsonData.items[i].volumeInfo.title;\n    console.log(\"title \" + title);\n    \n    // Create a regular expression for \"turing\"\n    var regEx = /turing/i;\n    \n    // Test the title with the regular expression\n    var res = regEx.test(title);\n    \n    \n    // If the title passes the regular expression, add one to the confirmed items\n    if (res === true) {\n        confirmedItems++;\n    }\n}\n\n// Test to make sure the number of confirmedItems is equal to the item count\ntests[\"total items\"] = confirmedItems === itemCount;\ntests[\"Status code is 200\"] = responseCode.code === 200;\n\n",
+			"preRequestScript": "",
+			"currentHelper": "normal",
+			"pathVariables": {},
+			"version": 2,
+			"name": "https://www.googleapis.com/books/v1/volumes?q=turing",
+			"description": "",
+			"descriptionFormat": "html",
+			"collectionId": "60891044-afc7-f5fb-8435-9072615bded7"
+		}
+	]
+}
