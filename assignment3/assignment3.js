@@ -4,54 +4,89 @@ var app = express();
 
 app.get('/gets/', function(req, res) {
 
-   // Set up Response
-   res.set('Content-Type', 'application/html');
-   var s = "<html><body>\n"
+    // Set up Response
+    res.set('Content-Type', 'application/html');
+    var s = "<html><body>\n"
 
-   s += "\t\tHeaders<table>";
+    s += "<table>"
 
-   for (var header in req.headers) {
-       s += '<tr><td>' + header + '</td><td>' + req.headers[header] + '</td></tr>'
+    githubUserPresent = false
+    githubTokenPresent = false
 
-   }
+    githubUser = ''
+    githubToken = ''
 
-   s += "</table>"
+    if (req.param('github_user') === undefined) {
+        s += '<tr><td>' + "ERROR: No Github Username Provided" + '</td></tr>'
+    }
+    else {
+        githubUser = req.param('github_user')
+        githubUserPresent = true
+    }
 
-   // Make sure the correct OAuth token was provided
+    if (req.param('github_token') === undefined) {
+        s += '<tr><td>' + "ERROR: No Github Token Provided" + '</td></tr>'
+    }
+    else {
+        githubToken = req.param('github_token')
+        githubTokenPresent = true
+    }
 
-   // Access Git Hub
-   var github = new GitHubApi({
-       // required
-       version: "3.0.0"
-   });
 
-   var token = "3f4af2c6a2e8bd385d7bfe86e71431f57f31b52f";
 
-   github.authenticate({
-       type: "oauth",
-       token: token
-   });
+    // Make sure the correct OAuth token was provided
+    if (githubUserPresent === true && githubTokenPresent === true) {
 
-   github.user.get({ user: 'tannerjuby'} , function(err, res) {
-       console.log("GOT ERR?", err);
-       console.log("GOT RES?", res);
+        // Access Git Hub
+        var github = new GitHubApi({
+            // required
+            version: "3.0.0"
+        });
 
-       s += '<p>' + err + '</p>';
-       s += '<p>' + res + '</p>';
+        github.authenticate({
+            type: "oauth",
+            token: githubToken
+        });
 
-       github.repos.getAll({}, function(err, res) {
-           console.log("GOT ERR?", err);
-           console.log("GOT RES?", res);
+        github.user.get({ user: githubUser} , function(error1, response1) {
+            console.log("GOT ERR?", error1);
+            console.log("GOT RES?", response1);
 
-           s += '<p>' + err + '</p>';
-           s += '<p>' + res + '</p>';
-       });
-   });
+            if (error1 === null) {
+                s += '<tr><td>' + JSON.stringify(response1) + '</td></tr>';
+            }
+            else {
+                s += '<tr><td>' + JSON.stringify(error1) + '</td></tr>';
+            }
 
-    s += "</body></html>";
+            github.repos.getAll({}, function(error2, response2) {
+                console.log("GOT ERR?", error2);
+                console.log("GOT RES?", response2);
 
-    res.send(s)
+                if (error2 === null) {
+                    s += '<tr><td>' + JSON.stringify(response2) + '</td></tr>';
+                }
+                else {
+                    s += '<tr><td>' + JSON.stringify(error2) + '</td></tr>';
+                }
+
+                s += "</table>"
+                s += "</body></html>";
+
+                res.send(s)
+            });
+        });
+
+    }
+    else {
+
+        s += "</table>"
+        s += "</body></html>";
+
+        res.send(s)
+    }
+
 })
 
-app.listen(3000);
+app.listen("tannerjuby-test.apigee.net/assignment3/");
 console.log("Server running on...")
