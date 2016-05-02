@@ -37,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2302B8DB1CCFD37D00A3F5C9 /* AFNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AFNetworking.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/BestPrice-bpndzqkubmhvgwcwfyzsqliyguld/Build/Products/Debug-iphoneos/AFNetworking.framework"; sourceTree = "<group>"; };
+		2302B8DC1CCFD37D00A3F5C9 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/BestPrice-bpndzqkubmhvgwcwfyzsqliyguld/Build/Products/Debug-iphoneos/SwiftyJSON.framework"; sourceTree = "<group>"; };
 		23FF4EA91CBEB2E000AF9538 /* BestPrice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BestPrice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23FF4EAC1CBEB2E000AF9538 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		23FF4EAE1CBEB2E000AF9538 /* ProductInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductInputViewController.swift; sourceTree = "<group>"; };
@@ -166,6 +168,8 @@
 		FD9806F1FFF7BBC92B2D0ECD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2302B8DB1CCFD37D00A3F5C9 /* AFNetworking.framework */,
+				2302B8DC1CCFD37D00A3F5C9 /* SwiftyJSON.framework */,
 				79856BDEE7A6A0AAE8160FD5 /* Pods_BestPrice.framework */,
 			);
 			name = Frameworks;
